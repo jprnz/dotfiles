@@ -1,83 +1,74 @@
-# Completion
-fpath+=(plugins/zsh-completions/src)
-autoload -Uz compinit
-compinit -D
+# Load more completions
+fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
 
-# Command Parameter Completion
-compctl -z fg
-compctl -j kill
-compctl -j disown
-compctl -u chown
-compctl -u su
-compctl -c sudo
-compctl -c which compctl -c type
-compctl -c hash
-compctl -c unhash
-compctl -o setopt
-compctl -o unsetopt
-compctl -a alias
-compctl -a unalias
-compctl -A shift
-compctl -v export
-compctl -v unset
-compctl -v echo
-compctl -b bindkey
+# Should be called before compinit
+zmodload zsh/complist
 
-# Expansion options
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
-zstyle ':completion:*:match:*' original only
-zstyle ':completion::prefix-1:*' completer _complete
-zstyle ':completion:incremental:*' completer _complete _correct
-zstyle ':completion:predict:*' completer _complete
-zstyle ':completion:*:functions' ignored-patterns '_*'
+# Use hjlk in menu selection (during completion)
+# Doesn't work well with interactive mode
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 
-# Ignore backup files in complection (except for rm)
-zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.*~' '*?.old' '*?.pro'
+bindkey -M menuselect '^xg' clear-screen
+bindkey -M menuselect '^xi' vi-insert                      # Insert
+bindkey -M menuselect '^xh' accept-and-hold                # Hold
+bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
+bindkey -M menuselect '^xu' undo                           # Undo
 
-# Enable SSH completion
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle '*' single-ignored show
+autoload -U compinit; compinit
+_comp_options+=(globdots) # With hidden files
 
-# Complete manpages by section
-zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*:manuals.*' insert-sections true
 
-# Settings for URL matching
-zstyle ':completion:*:urls' local 'www' '/var/www/' 'public_html'
+# setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 
-# Completion caching ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+# | zstyles |
+# Ztyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
 
-# Expand partial paths
-zstyle ':completion:*' expand 'yes'
-zstyle ':completion:*' squeeze-slashes 'yes'
+# Define completers
+zstyle ':completion:*' completer _extensions _complete _approximate
 
-# Include non-hidden directories in globbed file completions
-zstyle ':completion::complete:*' '\'
+# Use cache for commands using cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+zstyle ':completion:*' complete true
 
-# Tag-order 'globbed-files directories' all-files
-zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
+zle -C alias-expension complete-word _generic
+bindkey '^A' alias-expension
+zstyle ':completion:alias-expension:*' completer _expand_alias
 
-# Don't complete backup files as executables
-zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
 
-# Separate matches into groups
-zstyle ':completion:*:matches' group 'yes'
+# Autocomplete options for cd instead of directory stack
+zstyle ':completion:*' complete-options true
+
+zstyle ':completion:*' file-sort modification
+
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+
+# Colors for files and directory
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Only display some tags for the command cd
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+
+# Required for completion to be in good groups (named after the tags)
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
 
-# Message formatting
-zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
-zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
+# See ZSHCOMPWID "completion matching control"
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' keep-prefix true
 
-# Describe options in full
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-# Set colors
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
