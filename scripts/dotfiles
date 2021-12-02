@@ -41,8 +41,6 @@ function checkout_backup {
       --files-from=<(echo "$files") \
       $HOME "$DOTBAK"
     dotfiles checkout -q
-    dotfiles submodule init
-    dotfiles submodule update 
 
     # TODO apply attributes from backup directory
     chmod 600 $HOME/.ssh/config
