@@ -23,8 +23,9 @@ eval $(dircolors -b $HOME/.dircolors)
 umask 007
 
 # These need to be sourced last
-source $ZSHDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
-source $ZSHDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSHDIR/plugins/zsh-fzf/completion.zsh
 source $ZSHDIR/plugins/zsh-fzf/bindings.zsh
+source $ZSHDIR/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
+source $ZSHDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
+source $ZSHDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
