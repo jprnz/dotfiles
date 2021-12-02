@@ -1,0 +1,10 @@
+name: devel
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - black
+  - ipdb
+  - ipython
+  - pynvim
+  - python-lsp-server

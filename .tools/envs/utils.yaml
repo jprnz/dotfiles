@@ -1,0 +1,13 @@
+name: utils
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - fzf
+  - htop
+  - nnn
+  - ripgrep
+  - tmux
+  - universal-ctags
+  - vim
+  - nodejs

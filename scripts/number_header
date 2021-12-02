@@ -1,0 +1,42 @@
+#!/bin/bash
+# vim:ft=awk
+
+set -e
+
+SEP="$1"
+
+# Assumes space delimited input
+awk -F "${SEP:="\t"}" -v CF=1 '{
+	OFS = FS
+	sub(/\r$/, "", $0)
+	if (NR == 1) {
+		while(CF <= NF) {
+			num_len = length(sprintf("%s", CF))
+			header_str = $CF
+			gsub(/./, "_", header_str)
+			header_str = CF substr(header_str, 1 + num_len)
+
+			# Add spaces to original header if colnumber is bigger
+			if (length($CF) < length(header_str)) {
+				add_space = header_str
+				gsub(/./, " ", add_space) 
+				$CF = $CF substr(add_space, 1, length(add_space) - length($CF))
+			}
+			
+			# Add to result
+			if (CF == 1) {
+				res = header_str 
+			} else {
+				res = res FS header_str
+			}
+			
+			# Iterate
+			CF += 1
+		}
+		print res
+		print $0
+	} else {
+		print $0
+	}
+}' -
+

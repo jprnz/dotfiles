@@ -1,0 +1,4 @@
+#!/bin/env bash
+
+squeue "$@" -o '%0M %0i %0u %0j %0t %0C %0m %0Q %0N' \
+ | column -t
