@@ -19,52 +19,58 @@ function check_dirty {
 }
 
 function checkout_backup {
-  set +e
-  echo "Checking out $DOTREPO..."
-  res=$(dotfiles checkout 2>&1 && wait)
-  if [ $? -eq 0 ]; then
-    echo "Checkout sucessful"
-  else
-    set -e
-    files=$(echo "$res" \
-      | grep -P "^\s+" \
-      | awk {'print $1'})
-    echo -e "\nCheckout detected the following files already exist:"
-    echo -e "$(echo "$files" | sed -r "s/^/  /")\n"
+  bak_files=()
+  echo -e "\nChecking for potential conflicts..."
+  dot_files=($(dotfiles status --porcelain | awk '{if ($1 == "D") {print $2}}'))
+  for file in ${dot_files[@]}; do
+    if [ -e $HOME/$file ]; then
+        bak_files+=($file)
+    elif [ -L $HOME/$file ]; then
+        rm $HOME/$file
+    else
+        continue
+    fi
+  done
+
+  # Then copy / remove files
+  if [ ! -z "$bak_files" ]; then
+    echo -e "Checkout detected the following files already exist:"
+    echo -e "$(printf "  %s\n" ${bak_files[@]})"
     echo -e "These files will be moved to $DOTBAK"
     echo -e "Existing backups will be written over (ctrl-c to abort)\n" 
     sleep 1
-    set -x
+
     rsync \
-      -aLRJ \
+      -a \
       --remove-source-files \
-      --files-from=<(echo "$files") \
+      --files-from=<(printf "%s\n" "${bak_files[@]}") \
       "$HOME" "$DOTBAK"
-    dotfiles checkout -q
-
-    # TODO apply attributes from backup directory
-    chmod 600 $HOME/.ssh/config
-
-    # Install vim plugins
-    vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+  else
+    echo "No conflicts found..."
   fi
-  set -e
+    
+  echo "Checking out dotfiles..."
+  dotfiles checkout
+
+  echo "Running post-checkout tasks...."
+  # TODO apply attributes from backup directory
+  chmod 600 $HOME/.ssh/config
+
+  # Install vim plugins
+  command vim -es -u $HOME/.vimrc -i NONE -c 'PlugInstall | qa'
 }
 
 function install {
   # Create repo
   (
-    if [ $(check_dirty) ]; then
-      error "Existing repo found with uncommited changes!"
-    fi
-
     [ -d $DOTDIR ] && rm -rf $DOTDIR
-    git clone --recursive --bare $DOTREPO $DOTDIR
+    git clone --bare $DOTREPO $DOTDIR
     dotfiles config status.showUntrackedFiles no
   ) || error "Could not clone repo: $DOTREPO"
 
   # Checkout
-  checkout_backup
+  checkout_backup 
+  echo "All done!"
 }
 
 # Parse input
