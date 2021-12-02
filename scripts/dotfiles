@@ -80,7 +80,7 @@ function edit {
 }
 
 # Parse input
-if [ -z "$@" ]; then
+if [ -z "$1" ]; then
   dotfiles status
   exit 0
 fi
