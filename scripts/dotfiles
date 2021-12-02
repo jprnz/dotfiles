@@ -21,9 +21,8 @@ function check_dirty {
 function checkout_backup {
   set +e
   echo "Checking out $DOTREPO..."
-  res=$(dotfiles checkout 2>&1)
+  res=$(dotfiles checkout 2>&1 && wait)
   if [ $? -eq 0 ]; then
-    dotfiles submodule update --init --recursive
     echo "Checkout sucessful"
   else
     set -e
@@ -31,15 +30,16 @@ function checkout_backup {
       | grep -P "^\s+" \
       | awk {'print $1'})
     echo -e "\nCheckout detected the following files already exist:"
-    echo -e "$(echo "$files" | sed -r "s/^/  /")"
-    echo -e "\nThese files will be moved to $DOTBAK"
-    echo -e "Existing backups will be written over (ctrl-c to abort)" 
+    echo -e "$(echo "$files" | sed -r "s/^/  /")\n"
+    echo -e "These files will be moved to $DOTBAK"
+    echo -e "Existing backups will be written over (ctrl-c to abort)\n" 
     sleep 1
+    set -x
     rsync \
-      -arLR \
+      -aLRJ \
       --remove-source-files \
       --files-from=<(echo "$files") \
-      $HOME "$DOTBAK"
+      "$HOME" "$DOTBAK"
     dotfiles checkout -q
 
     # TODO apply attributes from backup directory
