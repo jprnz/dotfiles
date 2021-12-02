@@ -8,7 +8,7 @@ EXPORTS=(
 
 path=$(readlink -f $(dirname $0))
 conda_path=$path/conda
-output_path=$path/bin
+output_path=$HOME/bin
 
 function write_script() {
   ret=$(
@@ -17,7 +17,7 @@ function write_script() {
 			set -eo pipefail
 
 			source $conda_path/bin/activate $1
-			$2
+			$2 "\$@"
 		EOF
   )
 
