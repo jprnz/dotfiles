@@ -73,12 +73,27 @@ function install {
   echo "All done!"
 }
 
+function edit {
+  export GIT_DIR=$DOTDIR
+  export GIT_WORK_TREE=$HOME
+  vim "${@:2}"
+}
+
 # Parse input
 while [[ "$#" -gt 0 ]]; do
   case $1 in
-    install) install; shift ;;
-    *) dotfiles "$@" ;;
+    install) 
+      install
+      break
+      ;;
+    edit) 
+      edit "$@"
+      break
+      ;;
+    *)
+      dotfiles "$@"
+      break
+      ;;
   esac
-  shift
 done
 
