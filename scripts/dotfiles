@@ -80,6 +80,11 @@ function edit {
 }
 
 # Parse input
+if [ -z "$@" ]; then
+  dotfiles status
+  exit 0
+fi
+
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     install) 
