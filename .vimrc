@@ -23,8 +23,9 @@ Plug 'tpope/vim-unimpaired'
 
 " Languages
 Plug 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'sheerun/vim-polyglot'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " UI and Navigation
 Plug 'flazz/vim-colorschemes'
