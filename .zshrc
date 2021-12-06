@@ -17,6 +17,7 @@ export SAVEHIST=$HISTSIZE
 export HISTFILE=$ZSHDOTDIR/.history
 
 # Export statements
+export SHELL="$(readlink -f $(which zsh))"
 export EDITOR="vim"
 export VISUAL="vim"
 export MANPAGER='less'
@@ -34,7 +35,6 @@ umask 007
 # These need to be sourced last
 source $ZSHDOTDIR/plugins/zsh-fzf/completion.zsh
 source $ZSHDOTDIR/plugins/zsh-fzf/bindings.zsh
-source $ZSHDOTDIR/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 source $ZSHDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 source $ZSHDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

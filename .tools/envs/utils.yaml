@@ -11,4 +11,6 @@ dependencies:
   - universal-ctags
   - vim
   - nodejs
+  - yarn
   - zsh
+

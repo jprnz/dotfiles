@@ -25,7 +25,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " UI and Navigation
 Plug 'flazz/vim-colorschemes'
