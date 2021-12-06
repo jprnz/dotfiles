@@ -1,11 +1,20 @@
-# Source zsh files 
-ZSHDIR="$HOME/.zsh"
-for config in $ZSHDIR/*.zsh; source $config
+# Source zsh files, order matters
+configs=(
+  "setopt.zsh"
+  "completions.zsh"
+  "bindings.zsh"
+  "prompt.zsh"
+  "aliases.zsh"
+  "functions.zsh"
+)
+
+ZSHDOTDIR="$HOME/.zsh"
+for config in ${configs[@]}; source $ZSHDOTDIR/$config
 
 # History
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
-export HISTFILE=$ZSHDIR/.history
+export HISTFILE=$ZSHDOTDIR/.history
 
 # Export statements
 export EDITOR="vim"
@@ -23,9 +32,9 @@ eval $(dircolors -b $HOME/.dircolors)
 umask 007
 
 # These need to be sourced last
-source $ZSHDIR/plugins/zsh-fzf/completion.zsh
-source $ZSHDIR/plugins/zsh-fzf/bindings.zsh
-source $ZSHDIR/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
-source $ZSHDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
-source $ZSHDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSHDOTDIR/plugins/zsh-fzf/completion.zsh
+source $ZSHDOTDIR/plugins/zsh-fzf/bindings.zsh
+source $ZSHDOTDIR/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
+source $ZSHDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
+source $ZSHDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

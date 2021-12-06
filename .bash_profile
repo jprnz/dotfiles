@@ -2,7 +2,6 @@
 export TERM=xterm
 
 # User specific environment and startup programs
-PATH=$HOME/local/bin:$PATH
 PATH=$HOME/scripts:$PATH
 PATH=$HOME/bin:$PATH
 export PATH=$PATH
