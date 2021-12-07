@@ -70,6 +70,7 @@ function install {
 
   # Checkout
   checkout_backup 
+  source $HOME/.bash_profile
   echo "All done!"
 }
 
