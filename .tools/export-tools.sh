@@ -3,7 +3,7 @@ set -eo pipefail
 
 EXPORTS=(
   "htop" "nnn" "tmux" "vim" "rg" "fzf" "ctags"
-  "black" "node" "zsh"
+  "black" "node" "zsh" "yarn"
 )
 
 path=$(readlink -f $(dirname $0))
@@ -16,8 +16,10 @@ function write_script() {
 			#!/bin/bash
 			set -eo pipefail
 
-			source $conda_path/bin/activate $1
-			$2 "\$@"
+      if [[ -z \$CONDA_PREFIX || \$(basename \$CONDA_PREFIX) != "$1" ]]; then
+        source $conda_path/bin/activate $1
+      fi
+			exec \$CONDA_PREFIX/bin/$2 "\$@"
 		EOF
   )
 
