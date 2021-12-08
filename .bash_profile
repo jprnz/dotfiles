@@ -1,3 +1,5 @@
+# Set zsh
+export ZDOTDIR="$HOME/.zsh"
 # Manually set term
 export TERM=xterm
 
