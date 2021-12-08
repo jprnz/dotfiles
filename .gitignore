@@ -5,3 +5,4 @@
 .vim/swap/
 .vim/undo/
 .zsh/.*
+!.zsh/.zsh_profile
