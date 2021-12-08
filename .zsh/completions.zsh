@@ -1,5 +1,5 @@
 # Load more completions
-fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+fpath+=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
 
 # Should be called before compinit
 zmodload zsh/complist
@@ -35,7 +35,7 @@ zstyle ':completion:*' completer _extensions _complete _approximate
 
 # Use cache for commands using cache
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+zstyle ':completion:*' cache-path "$ZDOTDIR/zsh/.zcompcache"
 # Complete the alias when _expand_alias is used as a function
 zstyle ':completion:*' complete true
 

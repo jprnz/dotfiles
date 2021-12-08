@@ -1,1 +1,2 @@
+compaudit | xargs chmod g-w
 source .bash_profile

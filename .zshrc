@@ -8,13 +8,13 @@ configs=(
   "functions.zsh"
 )
 
-ZSHDOTDIR="$HOME/.zsh"
-for config in ${configs[@]}; source $ZSHDOTDIR/$config
+ZDOTDIR="$HOME/.zsh"
+for config in ${configs[@]}; source $ZDOTDIR/$config
 
 # History
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
-export HISTFILE=$ZSHDOTDIR/.history
+export HISTFILE=$ZDOTDIR/.history
 
 # Export statements
 export SHELL="$(readlink -f $(which zsh))"
@@ -33,8 +33,8 @@ eval $(dircolors -b $HOME/.dircolors)
 umask 007
 
 # These need to be sourced last
-source $ZSHDOTDIR/plugins/zsh-fzf/completion.zsh
-source $ZSHDOTDIR/plugins/zsh-fzf/bindings.zsh
-source $ZSHDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
-source $ZSHDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/plugins/zsh-fzf/completion.zsh
+source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
+source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

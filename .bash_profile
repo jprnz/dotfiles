@@ -31,4 +31,4 @@ export LC_MEASUREMENT="en_US.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-eval $(dircolors $HOME/.dir_colors)
+eval $(dircolors $HOME/.dircolors)
