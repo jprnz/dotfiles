@@ -22,7 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 
 " Languages
-Plug 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
+Plug 'snakemake/snakemake', {'rtp': 'misc/vim/'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}

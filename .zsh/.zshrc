@@ -1,6 +1,5 @@
 # Source zsh files, order matters
 configs=(
-  "setopt.zsh"
   "completions.zsh"
   "bindings.zsh"
   "prompt.zsh"
@@ -37,4 +36,5 @@ source $ZDOTDIR/plugins/zsh-fzf/completion.zsh
 source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
 source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
