@@ -15,10 +15,11 @@ function write_script() {
     cat <<-EOF
 			#!/bin/bash
 			set -eo pipefail
+			prefix=$conda_prefix/envs/$1
 
-      if [[ -z \$CONDA_PREFIX || \$(basename \$CONDA_PREFIX) != "$1" ]]; then
-        source $conda_path/bin/activate $1
-      fi
+			if [[ -z \$CONDA_PREFIX || $CONDA_PREFIX != "$prefix" ]]; then
+			   source $conda_path/bin/activate $1
+			fi
 			exec \$CONDA_PREFIX/bin/$2 "\$@"
 		EOF
   )

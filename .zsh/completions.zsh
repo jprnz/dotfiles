@@ -17,7 +17,7 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
-autoload -U compinit; compinit
+autoload -U compinit -Cd /hpc/home/jp102/.zsh/.zcompdump; compinit
 _comp_options+=(globdots) # With hidden files
 
 

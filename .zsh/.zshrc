@@ -37,4 +37,3 @@ source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
 source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
