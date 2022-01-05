@@ -12,7 +12,6 @@ Plug 'tpope/vim-fugitive'
 " Edit
 Plug 'chrisbra/csv.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ervandew/supertab'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-sandwich'
@@ -20,12 +19,12 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'ervandew/supertab'
 
 " Languages
 Plug 'snakemake/snakemake', {'rtp': 'misc/vim/'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " UI and Navigation
 Plug 'flazz/vim-colorschemes'
@@ -38,8 +37,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/tmux-complete.vim'
 
 " Finder
-Plug 'Yggdroot/LeaderF'
-"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
+
+" Coc 
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} 
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} 
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'} 
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'} 
+Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
+
 
 " Enable Vundel and re-enable filetype things
 call plug#end()
@@ -119,18 +128,6 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 au BufWritePre * let &bex = '-' . strftime("%m%d%Y-%H%M%S") . '.vim.bak'
-
-" -- LeaderF
-let g:Lf_HideHelp = 0
-let g:Lf_UseCache = 0
-let g:Lf_UseVersionControlTool = 0
-let g:Lf_IgnoreCurrentBufferName = 1
-
-let g:Lf_ShowDevIcons = 0
-let g:Lf_PreviewInPopup = 1
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_StlSeparator = { 'left': "", 'right': "", 'font': "DejaVu Sans Mono for Powerline" }
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 
 " -- Mappings
@@ -264,6 +261,32 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
+" -- Plugins
+" Vim-Tmux-Navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
+
+" Same for insert-mode
+inoremap <silent> <c-h> <C-\><C-O>:TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <C-\><C-O>:TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <C-\><C-O>:TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <C-\><C-O>:TmuxNavigateRight<cr>
+inoremap <silent> <c-\\> <C-\><C-O>:TmuxNavigatePrevious<cr>
+
+let g:Lf_HideHelp = 0
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+
+let g:Lf_ShowDevIcons = 0
+let g:Lf_PreviewInPopup = 1
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_StlSeparator = { 'left': "", 'right': "", 'font': "DejaVu Sans Mono for Powerline" }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 " Tagbar
 let g:tagbar_left = 0
@@ -316,21 +339,6 @@ hi link CSVColumnHeaderEven Todo
 "nnoremap <leader>m :CtrlPMRUFiles<CR>
 "nnoremap <leader>t :CtrlPTag<CR>
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" Vim-Tmux-Navigator
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
-
-" Same for insert-mode
-inoremap <silent> <c-h> <C-\><C-O>:TmuxNavigateLeft<cr>
-inoremap <silent> <c-j> <C-\><C-O>:TmuxNavigateDown<cr>
-inoremap <silent> <c-k> <C-\><C-O>:TmuxNavigateUp<cr>
-inoremap <silent> <c-l> <C-\><C-O>:TmuxNavigateRight<cr>
-inoremap <silent> <c-\\> <C-\><C-O>:TmuxNavigatePrevious<cr>
 
 " Polyglot
 " let g:polyglot_disabled = ['r']
