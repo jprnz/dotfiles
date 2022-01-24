@@ -35,3 +35,7 @@ export LC_IDENTIFICATION="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 eval $(dircolors $HOME/.dircolors)
+
+export NODE_OPTIONS=--openssl-legacy-provider
+export PATH="$PATH:$HOME/.nimble/bin:$PATH"
+

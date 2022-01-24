@@ -49,12 +49,15 @@ Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'} 
 Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 
-
 " Enable Vundel and re-enable filetype things
 call plug#end()
 
 " -- Colors
-colorscheme grb256
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+
 hi! link TabLine Comment
 hi! link TabLineFill NonText
 hi! link TabLineSel Special
@@ -101,6 +104,8 @@ set wildmode=list:longest      " Make wildmenu a list
 set nolbr
 set nowrap
 set whichwrap=b,s,h,l,<,>,~,[,] " All
+
+colorscheme jellyx
 
 " -- Indent
 set shiftwidth=2
@@ -356,6 +361,7 @@ let g:gitgutter_set_sign_backgrounds = 0
 highlight SignColumn ctermbg=black
 
 " Gutentags
+let g:gutentags_cache_dir = $HOME . '/.vim/tags'
 let g:gutentags_ctags_exclude = ["conda/*", ".snakemake/*"]
 let g:gutentags_ctags_extra_args = [
       \ '--tag-relative=yes',
