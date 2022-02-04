@@ -17,3 +17,4 @@ umask 007
 
 # Start zsh without global sourcing global config
 alias zsh="zsh -d"
+

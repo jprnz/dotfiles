@@ -1,4 +1,11 @@
+"---Create paths if needed
 let $TMPDIR = $HOME."/.vim/tmp"
+for path in ["backup", "swap", "undo", "tmp"]
+  if !isdirectory($HOME . "/.vim/" . path)
+      call mkdir($HOME . "/.vim/" . path, "p")
+  endif
+endfor
+
 
 "---Plugins
 call plug#begin()
@@ -83,7 +90,7 @@ set incsearch                  " Highlight as
 set lazyredraw                 " Don't redraw while executing macros
 set linespace=0                " Space between lines
 set magic                      " Allow special characters in regular expressions
-set mat=3                      " Tenths of a second to blink when matching brackets via showmatch
+set mat=5                      " Tenths of a second to blink when matching brackets via showmatch
 set mouse=a                    " Mouse support
 set noerrorbells               " No audible bells
 set novisualbell               " No visual bells
@@ -122,12 +129,6 @@ set shiftround
 set backup
 set undofile
 set swapfile
-
-for path in ["backup", "swap", "undo"]
-  if !isdirectory($HOME . "/.vim/" . path)
-      call mkdir($HOME . "/.vim/" . path, "p")
-  endif
-endfor
 
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//

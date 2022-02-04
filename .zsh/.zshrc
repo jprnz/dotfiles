@@ -32,8 +32,14 @@ eval $(dircolors -b $HOME/.dircolors)
 umask 007
 
 # These need to be sourced last
+eval "$(zoxide init zsh --cmd "cd")"
 source $ZDOTDIR/plugins/zsh-fzf/completion.zsh
 source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
 source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+# Config for autosuggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+
 

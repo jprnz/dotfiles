@@ -137,8 +137,6 @@ setopt \
   no_sh_word_split          \
   share_history             \
      short_loops            \
-  no_single_line_zle        \
-     sun_keyboard_hack      \
      transient_rprompt      \
   no_traps_async            \
   no_typeset_silent         \
@@ -147,6 +145,5 @@ setopt \
      vi                     \
   no_warn_create_global     \
   no_xtrace                 \
-     zle                    \
   no_single_command
 
