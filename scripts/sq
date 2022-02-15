@@ -1,4 +1,4 @@
 #!/bin/env bash
 
-squeue "$@" -o '%0M %0i %0u %0j %0t %0C %0m %0Q %0N' \
+squeue -S "-M,t,V" -o '%0M %0i %0u %0a %0j %0t %0C %0m %0Q %R' "$@"\
  | column -t
