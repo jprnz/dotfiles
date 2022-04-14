@@ -2,8 +2,8 @@
 # The parser is also very primitive, and not human-friendly.
 htop_version=3.1.2
 config_reader_min_version=2
-fields=0 48 17 2 109 110 111 116 38 39 40 46 47 49 1
-sort_key=47
+fields=0 48 17 18 38 39 40 2 46 47 49 1
+sort_key=46
 sort_direction=-1
 tree_sort_key=0
 tree_sort_direction=1
@@ -31,12 +31,8 @@ show_cpu_usage=1
 show_cpu_frequency=0
 update_process_names=0
 account_guest_in_cpu_meter=0
-color_scheme=6
+color_scheme=0
 enable_mouse=1
 delay=15
 hide_function_bar=0
 header_layout=two_50_50
-column_meters_0=LeftCPUs4 Memory Swap DiskIO NetworkIO
-column_meter_modes_0=1 1 1 1 2
-column_meters_1=RightCPUs4 LoadAverage Tasks Uptime
-column_meter_modes_1=1 1 2 2
