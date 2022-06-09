@@ -7,6 +7,7 @@ alias lah='ls -lavh --group-directories-first'
 alias cp='cp -ai'
 alias mv='mv -i'
 alias rm='rm -I'
+alias rl='readlink -f'
 alias hn="hostname"
 alias dus='du -k * | sort -nr | cut -f2 | xargs -d "\n" du -sh'
 

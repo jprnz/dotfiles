@@ -2,9 +2,9 @@
 set -eo pipefail
 
 EXPORTS=(
-  "htop" "nnn" "tmux" "vim" "rg" "fzf" "ctags"
-  "black" "node" "zsh" "yarn" "ddsclient" "fish"
-  "zoxide"
+  "htop" "tmux" "vim" "rg" "fzf" "ctags"
+  "black" "node" "zsh" "yarn" "ddsclient" 
+  "zoxide" "lftp"
 )
 
 path=$(readlink -f $(dirname $0))
