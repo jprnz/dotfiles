@@ -1,9 +1,8 @@
 #!/bin/bash
 
 path="$PWD"
-conda_url="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+conda_url="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh"
 conda_file=$(basename $conda_url)
-
 error() {
   echo "Error: $@"
   exit 1
@@ -55,13 +54,6 @@ echo "---Installing conda..."
   # Install
   bash $conda_file -b -p "$path/conda" && rm $conda_file
 ) &> $log || error "Could not install conda"
-
-echo "---Installing mamba..."
-(
-  source conda/bin/activate base
-  conda install mamba -c conda-forge -y
-  mamba update conda -y
-) &> $log || error "Could not install mamba"
 
 echo "---Installing packages..."
 (

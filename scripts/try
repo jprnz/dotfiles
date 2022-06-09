@@ -1,14 +1,12 @@
 #!/bin/bash
 
-input="$@"
-
 count=1
 while true; do
-  ( sh -c "$input" ) 
+  ( sh -c "$@" ) 
   if [ $? -ne 0 ]; then
     echo "Restarting command, on attempt: $count"
     count=$(( $count + 1))
-    sleep 1
+    sleep 5
   else
     break
   fi

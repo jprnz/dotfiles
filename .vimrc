@@ -368,3 +368,10 @@ let g:gutentags_ctags_extra_args = [
       \ '--tag-relative=yes',
       \ '--fields=+ailmnS',
       \ ]
+
+" Coc
+if !empty($CONDA_PREFIX)
+  call coc#config('python', {
+        \   'pythonPath': $CONDA_PREFIX . '/bin/python'
+        \ })
+endif

@@ -1,21 +1,22 @@
 name: utils
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - python ==3.8.*
+  - python ==3.9.*
+  - black
   - fzf
   - htop
-  - nnn
+  - ipdb
+  - ipython
+  - lftp
+  - nodejs
   - ripgrep
   - tmux
   - universal-ctags
   - vim
-  - nodejs
   - yarn
-  - zsh
-  - fish
   - zoxide
+  - zsh
   - pip:
     - DukeDSClient
 
