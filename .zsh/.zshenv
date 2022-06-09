@@ -99,7 +99,6 @@ setopt \
   no_mail_warning           \
   no_mark_dirs              \
   no_menu_complete          \
-     monitor                \
      multibyte              \
      multios                \
   no_nomatch                \
