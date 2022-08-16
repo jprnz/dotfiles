@@ -1,6 +1,6 @@
 "---Create paths if needed
 let $TMPDIR = $HOME . "/.vim/tmp"
-for path in ["backup", "swap", "undo", "tmp"]
+for path in ["backup", "swap", "undo", "tmp", "cache/.LfCache"]
   if !isdirectory($HOME . "/.vim/" . path)
       call mkdir($HOME . "/.vim/" . path, "p")
   endif
@@ -362,7 +362,7 @@ let g:gitgutter_set_sign_backgrounds = 0
 highlight SignColumn ctermbg=black
 
 " Gutentags
-let g:gutentags_cache_dir = $HOME . '/.vim/tags'
+let g:gutentags_cache_dir = $HOME . '/.vim/cache/.LfCache/gtags'
 let g:gutentags_project_root = ['.git', '.snakemake', 'venv', 'conda']
 let g:gutentags_exclude_project_root = [$HOME, resolve($HOME), '*/.vim/plugged/*', '*/.snakemake/*', '*/venv/*', '*/conda/*']
 let g:gutentags_ctags_exclude = ['*/conda/*', '*/.vim/plugged/*', '*/.npm/*', '*/processed/*']
@@ -377,10 +377,31 @@ endif
 
 " LeaderF
 " don't show the help in normal mode
-let g:Lf_HideHelp = 1
-let g:Lf_UseCache = 0
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_HideHelp = 0
+let g:Lf_UseCache = 1
+
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_IgnoreCurrentBufferName = 1
+let g:Lf_GtagsGutentags = 1
+let g:Lf_CacheDirectory = $HOME . '/.vim/cache'
+let g:Lf_RgConfig = [
+        \ "--max-columns=150",
+        \ "--glob=!git/*",
+        \ "--glob=!conda/*",
+        \ "--glob=!.snakemake/*",
+        \ "--hidden"
+    \ ]
+
+let g:Lf_WldIgnore = {
+      \ 'dir': ['.snakemake', 'conda', '.git'],
+      \ 'file': []
+      \}
+
+" open the preview window automatically
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = {'Rg': 1 }
+
 
 " popup mode
 let g:Lf_WindowPosition = 'popup'
