@@ -59,18 +59,6 @@ Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 " Enable Vundel and re-enable filetype things
 call plug#end()
 
-" -- Colors
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-
-hi! link TabLine Comment
-hi! link TabLineFill NonText
-hi! link TabLineSel Special
-hi! link Folded Cursor
-hi! link FoldColumn Directory
-hi! ColorColumn guibg=#121212 ctermbg=234
 
 " -- Options
 set autochdir                  " Automatically cd into directory of file
@@ -112,7 +100,23 @@ set nolbr
 set nowrap
 set whichwrap=b,s,h,l,<,>,~,[,] " All
 
+
+" -- Colors
+set termguicolors
+set background=dark
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 colorscheme jellyx
+
+
+" -- Overrides for theme
+hi! link TabLine Comment
+hi! link TabLineFill NonText
+hi! link TabLineSel Special
+hi! link Folded Cursor
+hi! link FoldColumn Directory
+hi! ColorColumn guibg=#121212 ctermbg=234
+
 
 " -- Indent
 set shiftwidth=2
@@ -123,6 +127,7 @@ set smartindent
 set expandtab
 set smarttab
 set shiftround
+
 
 " -- Backups
 " Create directories
@@ -401,7 +406,6 @@ let g:Lf_WldIgnore = {
 " open the preview window automatically
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = {'Rg': 1 }
-
 
 " popup mode
 let g:Lf_WindowPosition = 'popup'
