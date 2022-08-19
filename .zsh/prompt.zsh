@@ -17,7 +17,7 @@ setprompt () {
       (( count = $count + 1 ))
     done
     PR_NO_C="%{$terminfo[sgr0]%}"
-    
+
     # PWD width
     local TERMWIDTH
     (( TERMWIDTH = ${COLUMNS} - 50 ))
@@ -26,7 +26,7 @@ setprompt () {
     local PWDSIZE=${#${(%):-%~}}
 
     if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
-	    (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
+      (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
     fi
 
    # Show vi mode
@@ -36,7 +36,7 @@ setprompt () {
    }
    zle -N zle-keymap-select
 
-   PS1=$'$PR_LIGHT_BLACK<$PR_LIGHT_GREEN%~$PR_LIGHT_BLACK>$PR_YELLOW>${VIMODE}>$PR_NO_C '
+   PS1=$'$PR_BLACK<$PR_YELLOW%~$PR_BLACK>$PR_YELLOW>${VIMODE}>$PR_NO_C '
 }
 
 setprompt
