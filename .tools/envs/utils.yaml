@@ -3,8 +3,8 @@ channels:
   - conda-forge
 dependencies:
   - python ==3.9.*
-  - black
   - fzf
+  - gcc
   - htop
   - ipdb
   - ipython
@@ -17,6 +17,12 @@ dependencies:
   - yarn
   - zoxide
   - zsh
+  - pynvim
+  - visidata
+  - rust 
+  - git
+  - unzip
+  - gxx_linux-64
   - pip:
     - DukeDSClient
 

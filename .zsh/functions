@@ -1,0 +1,52 @@
+# Functions 
+# vim:ft=sh
+
+# Copy and Move
+cpf() {
+	cp "$@" && goto "$_" && ls -l | grep --color=auto "$1";
+}
+
+
+# Config files
+conf () {
+	if [[ -z "$1" ]]; then
+		echo "Missing arguments. Syntax: {FILE|ALIAS}"
+		return 1
+	fi
+	case $1 in
+	  tmux)       $EDITOR $HOME/.tmux.conf ;;
+	  xdef)       $EDITOR $HOME/.Xdefaults ;;
+	  xin)        $EDITOR $HOME/.xinitrc ;;
+	  vim)        $EDITOR $HOME/.vimrc ;;
+	  zsh)        $EDITOR $HOME/.zshrc ;;
+	  func)       $EDITOR $ZDOTDIR/functions ;;
+	  alias)      $EDITOR $ZDOTDIR/aliases;;
+	  prompt)     $EDITOR $ZDOTDIR/prompt;;
+	  *)          [ -f "$1" ] && $EDITOR $1 || echo "Invalid Option";;
+	esac
+}
+
+
+# Libeoffice - Calc
+loc () {
+    libreoffice --calc --nologo --nolockcheck --norestore --nodefault $@ &
+}
+
+# Libeoffice - Writer
+low () {
+    libreoffice --writer --nologo --nolockcheck --norestore --nodefault $@ &
+}
+
+# SCP via micscore
+ocp () {
+    loc=`readlink -e $2`
+    scp -r $1 omicscore@localhost:/$loc
+}
+
+hist () {
+  histfile="$HOME/.zsh/history"
+  cut -f 2- -d' ' $histfile\
+    |  sed -r 's/([0-9]+):0;(.*)$/\1\t\2/' \
+    | awk -F '\t' '{$1=strftime("%Y%m%d-%T", $1); print $0}'
+}
+

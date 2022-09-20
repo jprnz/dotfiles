@@ -77,7 +77,7 @@ function install {
 function edit {
   export GIT_DIR=$DOTDIR
   export GIT_WORK_TREE=$HOME
-  vim "${@:2}"
+  nvim "${@:2}"
 }
 
 # Parse input

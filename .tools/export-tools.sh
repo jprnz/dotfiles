@@ -4,7 +4,7 @@ set -eo pipefail
 EXPORTS=(
   "htop" "tmux" "vim" "rg" "fzf" "ctags"
   "black" "node" "zsh" "yarn" "ddsclient" 
-  "zoxide" "lftp"
+  "zoxide" "lftp" "git" "gcc"
 )
 
 path=$(readlink -f $(dirname $0))

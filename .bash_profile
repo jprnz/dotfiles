@@ -2,7 +2,7 @@
 export ZDOTDIR="$HOME/.zsh"
 
 # Manually set term
-export TERM=xterm
+export TERM=xterm-256color
 
 # User specific environment and startup programs
 PATH=$HOME/scripts:$PATH

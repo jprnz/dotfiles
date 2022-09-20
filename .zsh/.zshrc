@@ -17,12 +17,11 @@ export HISTFILE=$ZDOTDIR/.history
 
 # Export statements
 export SHELL="$(readlink -f $(which zsh))"
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export MANPAGER='less'
 export DIRSTACKSIZE=6
 export LESSCHARSET='utf-8'
-export RXVT_SOCKET="$HOME/.urxvt/tmp"
 export TMUX_TMPDIR="$HOME/.tmux_sessions"
 
 # Colors
@@ -41,5 +40,5 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 # Config for autosuggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
