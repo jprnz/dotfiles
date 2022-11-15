@@ -3,11 +3,8 @@ local utils = require("plugins.config.lsp.utils")
 local M = {
   -- Servers to be installed
   install =  {
-    "awk_ls",
-    "bashls",
     "diagnosticls",
     "sumneko_lua",
-    "r_language_server",
     "pyright",
     -- "nimls",
     -- "perlnavigator",
