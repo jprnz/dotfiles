@@ -12,13 +12,14 @@ alias hn="hostname"
 alias dus='du -k * | sort -nr | cut -f2 | xargs -d "\n" du -sh'
 
 # Programs etc
-alias view="vim -R"
+alias view="nvim -R"
 alias viewdiff="vimdiff -R"
 alias tmux="tmux -2u"
 alias ddsc="export DDSCLIENT_CONF=$HOME/.ddsclient; ddsclient" 
 alias oddsc="export DDSCLIENT_CONF=$HOME/.ddsclient_omicscore; ddsclient" 
 alias sddsc="export DDSCLIENT_CONF=$HOME/.ddsclient_seqcore; ddsclient" 
 alias dots="dotfiles"
+alias vim="nvim"
 
 # SLURM Aliases that provide information in a useful manner for our clusters
 alias si="sinfo -o \"%20P %5D %14F %8z %10m %10d %11l %16f %N %C\""

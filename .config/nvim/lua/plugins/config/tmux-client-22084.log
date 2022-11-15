@@ -1,7 +1,0 @@
-1663002886.582551 client started (22084): version 3.3, socket /gpfs/fs1/home/jp102/.tmux_sessions/tmux-1024094/default, protocol 8
-1663002886.582695 on Linux 3.10.0-1160.31.1.el7.x86_64 #1 SMP Thu Jun 10 13:32:12 UTC 2021
-1663002886.582709 using libevent 2.1.10-stable (poll); ncurses 6.3
-1663002886.582741 flags are 0x10000
-1663002886.582752 socket is /gpfs/fs1/home/jp102/.tmux_sessions/tmux-1024094/default
-1663002886.584171 trying connect
-1663002886.584208 connect failed: Connection refused

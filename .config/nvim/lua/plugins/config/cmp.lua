@@ -8,35 +8,35 @@ local luasnip = require("luasnip")
 local cmp = require("cmp")
 local types = require("cmp.types")
 
-local cmdline_mapping = cmp.mapping.preset.insert({
-    ["<C-j>"] = cmp.mapping({
-        c = function()
-            if cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            else
-                feedkey("<Down>")
-            end
-        end,
-    }),
-    ["<C-k>"] = cmp.mapping({
-        c = function()
-            if cmp.visible() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-            else
-                feedkey("<Up>")
-            end
-        end,
-    }),
-    ["<Tab>"] = cmp.mapping({
-        c = function(fallback)
-            if cmp.visible() then
-                cmp.confirm({ select = true })
-            else
-                fallback()
-            end
-        end,
-    }),
-})
+-- local cmdline_mapping = cmp.mapping.preset.insert({
+--     ["<C-j>"] = cmp.mapping({
+--         c = function()
+--             if cmp.visible() then
+--                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+--             else
+--                 feedkey("<Down>")
+--             end
+--         end,
+--     }),
+--     ["<C-k>"] = cmp.mapping({
+--         c = function()
+--             if cmp.visible() then
+--                 cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+--             else
+--                 feedkey("<Up>")
+--             end
+--         end,
+--     }),
+--     ["<Tab>"] = cmp.mapping({
+--         c = function(fallback)
+--             if cmp.visible() then
+--                 cmp.confirm({ select = true })
+--             else
+--                 fallback()
+--             end
+--         end,
+--     }),
+-- })
 
 
 local opts = {
@@ -79,18 +79,18 @@ local opts = {
     { name = "buffer" },
   },
 
-  cmp.setup.cmdline("/", {
-    mapping = cmdline_mapping,
-    completion = {
-      autocomplete = {
-        types.cmp.TriggerEvent.TextChanged,
-      },
-    },
-    sources = cmp.config.sources({
-      { name = "buffer" },
-      { name = "tmux" },
-    }),
-  }),
+  -- cmp.setup.cmdline("/", {
+  --   mapping = cmdline_mapping,
+  --   completion = {
+  --     autocomplete = {
+  --       types.cmp.TriggerEvent.TextChanged,
+  --     },
+  --   },
+  --   sources = cmp.config.sources({
+  --     { name = "buffer" },
+  --     { name = "tmux" },
+  --   }),
+  -- }),
 
   window = {
     documentation = {

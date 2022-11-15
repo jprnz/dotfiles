@@ -11,6 +11,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
 
+
 -- Load Packer
 cmd([[packadd packer.nvim]])
 
@@ -42,17 +43,12 @@ require('packer').startup(function(use)
   -- Telescope
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = "make" }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
   -- Autocomplete
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use 'l3mon4d3/luasnip'
-  use 'ray-x/cmp-treesitter'
-  use 'andersevenrud/cmp-tmux'
+  use {'ms-jpq/coq_nvim', branch = 'coq', run = ':COQdeps'}
+  use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
+  use {'ms-jpq/coq.thirdparty', branch = '3p'}
 
   -- UI 
   use 'kyazdani42/nvim-web-devicons'
@@ -76,7 +72,7 @@ end)
 
 
 -- Plugins with configurations
-require("plugins.config.cmp")
+require("plugins.config.coq")
 require("plugins.config.lsp")
 require("plugins.config.telescope")
 require("plugins.config.gitsigns")

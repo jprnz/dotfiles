@@ -21,3 +21,5 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
+[safe]
+	directory = /gpfs/fs1/data/seqcore/fy/zimmerman-8044

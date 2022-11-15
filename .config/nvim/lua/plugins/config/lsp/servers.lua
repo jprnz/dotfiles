@@ -1,5 +1,4 @@
 local utils = require("plugins.config.lsp.utils")
-local cmp = require("cmp_nvim_lsp")
 
 local M = {
   -- Servers to be installed
@@ -32,7 +31,6 @@ local M = {
   -- Global config and flags for cmp
   default_config = {
     on_attach = utils.on_attach,
-    capabilities = cmp.update_capabilities(utils.capabilities),
     flags = {
       debounce_text_changes = 150
     }
