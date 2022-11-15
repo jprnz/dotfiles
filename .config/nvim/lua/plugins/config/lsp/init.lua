@@ -44,7 +44,9 @@ local servers = require("plugins.config.lsp.servers")
 
 -- Load mason and install servers if needed
 require("mason").setup()
-require("mason-lspconfig").setup({ensure_installed = servers.intall})
+require("mason-lspconfig").setup({
+    ensure_installed = servers.intall,
+    automatic_installation = true})
 
 -- Setup language servers
 local lspconfig = require("lspconfig")
