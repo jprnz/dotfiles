@@ -4,7 +4,7 @@ local M = {
   -- Servers to be installed
   install =  {
     "diagnosticls",
-    "sumneko_lua",
+    "lua_ls",
     "pyright",
     -- "nimls",
     -- "perlnavigator",

@@ -24,7 +24,7 @@ require('packer').startup(function(use)
   use 'folke/which-key.nvim'
   use 'aserowy/tmux.nvim'
   use 'ethanholz/nvim-lastplace'
-  use 'windwp/nvim-autopairs'
+  --use 'windwp/nvim-autopairs'
   use 'machakann/vim-sandwich'
   use 'norcalli/nvim-colorizer.lua'
 
@@ -38,7 +38,7 @@ require('packer').startup(function(use)
   -- Treesitter
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'p00f/nvim-ts-rainbow'
+  --use 'p00f/nvim-ts-rainbow'
 
   -- Telescope
   use 'nvim-lua/plenary.nvim'
@@ -62,7 +62,7 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Languages
-  use 'sheerun/vim-polyglot'
+  --use 'sheerun/vim-polyglot'
   use {'snakemake/snakemake', rtp = 'misc/vim/'}
 
   if packer_bootstrap then
@@ -83,7 +83,8 @@ require("plugins.config.themer")
 require("plugins.config.treesitter")
 require("plugins.config.trouble")
 require("plugins.config.lastplace")
-require("plugins.config.autopairs")
+--require("plugins.config.autopairs")
+
 
 -- Workaround for 'rtp' issue
 -- https://github.com/wbthomason/packer.nvim/issues/274

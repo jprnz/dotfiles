@@ -1,10 +1,14 @@
 #/bin/bash 
 set -eo pipefail
 
+#EXPORTS=(
+#  "htop" "tmux" "vim" "rg" "fzf" "ctags"
+#  "black" "node" "zsh" "yarn" "ddsclient" 
+#  "zoxide" "lftp" "git" "gcc"
+#)
+
 EXPORTS=(
-  "htop" "tmux" "vim" "rg" "fzf" "ctags"
-  "black" "node" "zsh" "yarn" "ddsclient" 
-  "zoxide" "lftp" "git" "gcc"
+  "htop" "zsh" "fish"
 )
 
 path=$(readlink -f $(dirname $0))
@@ -18,7 +22,7 @@ function write_script() {
 			set -eo pipefail
 			prefix=$conda_prefix/envs/$1
 
-			if [[ -z \$CONDA_PREFIX || $CONDA_PREFIX != "$prefix" ]]; then
+			if [[ -z \$CONDA_PREFIX || \$CONDA_PREFIX != "\$prefix" ]]; then
 			   source $conda_path/bin/activate $1
 			fi
 			exec \$CONDA_PREFIX/bin/$2 "\$@"

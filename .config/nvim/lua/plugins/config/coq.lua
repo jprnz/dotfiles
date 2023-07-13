@@ -6,6 +6,11 @@ vim.g.coq_settings = {
   limits = {
     completion_auto_timeout = 3
   },
+  clients = {
+    tmux = {
+      all_sessions = false
+    }
+  },
   display = {
     pum = {
       kind_context = {" | ", ""},
@@ -13,7 +18,7 @@ vim.g.coq_settings = {
     },
     icons = {
       mode = 'short',
-    }
+    },
   }
 }
 

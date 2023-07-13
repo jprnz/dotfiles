@@ -2,7 +2,7 @@ name: utils
 channels:
   - conda-forge
 dependencies:
-  - python ==3.9.*
+  - python
   - fzf
   - gcc
   - htop
@@ -23,6 +23,5 @@ dependencies:
   - git
   - unzip
   - gxx_linux-64
-  - pip:
-    - DukeDSClient
+  - fish
 
