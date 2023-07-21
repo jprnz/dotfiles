@@ -12,6 +12,12 @@ vim.g.coq_settings = {
     }
   },
   display = {
+    preview = { 
+      enabled = false,
+    },
+    ghost_text = {
+      context = {"", ""},
+    },
     pum = {
       kind_context = {" | ", ""},
       source_context = {" ", ""}
@@ -21,4 +27,5 @@ vim.g.coq_settings = {
     },
   }
 }
+
 

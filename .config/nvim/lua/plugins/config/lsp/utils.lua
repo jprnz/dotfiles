@@ -1,34 +1,97 @@
+local wk = require "which-key"
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 local M = {}
 
--- Capabilities
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- General LSP Mappings
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
 function M.on_attach(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
 
-  vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd',         vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K',          vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa',  vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr',  vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl',  function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
-  vim.keymap.set('n', '<space>D',   vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn',  vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca',  vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr',         vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f',   vim.lsp.buf.formatting, bufopts)
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  M.set_keys(client, bufnr)
 end
+
+function M.format()
+  vim.lsp.buf.format()
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+function M.toggle_diagnostics()
+  M.diagnostics_active = not M.diagnostics_active
+  if M.diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end
+
+function M.set_keys(client, buffer)
+  local cap = client.server_capabilities
+
+  local keymap = {
+    buffer = buffer,
+    ["<leader>"] = {
+      j = {
+        name = "+goto",
+        D = { vim.lsp.buf.declaration, "declaration" },
+        d = { vim.lsp.buf.definition, "definition" },
+        r = { vim.lsp.buf.references, "find references" },
+        i = { vim.lsp.buf.implementation, "implementation" },
+        t = { vim.lsp.buf.type_definition, "type definition" },
+      },
+      c = {
+        name = "+code",
+        t = { toggle_diagnostics, "toggle diagnostics" },
+        r = { vim.lsp.buf.rename, "rename" },
+        a = {
+          { vim.lsp.buf.code_action, "code action" },
+          { vim.lsp.buf.code_action, "code action", mode = "v" },
+        },
+        f = {
+          {
+            M.format,
+            "format document",
+            cond = cap.documentFormatting,
+          },
+          {
+            M.format,
+            "format range",
+            cond = cap.documentRangeFormatting,
+            mode = "v",
+          },
+        },
+        d = { vim.diagnostic.open_float, "line diagnostics" },
+      },
+    },
+    ["<C-k>"] = { vim.lsp.buf.signature_help, "signature help", mode = { "n", "i" } },
+    ["K"] = { vim.lsp.buf.hover, "hover" },
+    ["[d"] = { vim.diagnostic.goto_prev, "next diagnostic" },
+    ["]d"] = { vim.diagnostic.goto_next, "prev diagnostic" },
+  }
+
+  wk.register(keymap)
+end
+
+M.handlers = {
+  ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+    underline = false,
+    severity_sort = true,
+    code_action_icon = ">",
+    float = {
+      focusable = false,
+      style = "minimal",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }),
+
+}
 
 return M

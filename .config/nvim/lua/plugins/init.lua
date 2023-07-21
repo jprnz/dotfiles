@@ -20,13 +20,16 @@ require('packer').startup(function(use)
 
   -- Utils
   use 'wbthomason/packer.nvim'
-  use 'lewis6991/impatient.nvim'
-  use 'folke/which-key.nvim'
   use 'aserowy/tmux.nvim'
+  use 'echasnovski/mini.ai'
+  use 'echasnovski/mini.bufremove'
+  use 'echasnovski/mini.comment'
+  use 'echasnovski/mini.surround'
+  use 'echasnovski/mini.splitjoin'
   use 'ethanholz/nvim-lastplace'
-  --use 'windwp/nvim-autopairs'
-  use 'machakann/vim-sandwich'
-  use 'norcalli/nvim-colorizer.lua'
+  use 'folke/which-key.nvim'
+  use 'kylechui/nvim-surround'
+  use 'lewis6991/impatient.nvim'
 
   -- LSP Installer and Config (using mason)
   use 'neovim/nvim-lspconfig'
@@ -36,9 +39,9 @@ require('packer').startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim'
 
   -- Treesitter
-  use 'nvim-treesitter/nvim-treesitter'
+  use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdateSync'}
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  --use 'p00f/nvim-ts-rainbow'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- Telescope
   use 'nvim-lua/plenary.nvim'
@@ -54,6 +57,7 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'hoob3rt/lualine.nvim'
   use 'themercorp/themer.lua'
+  use 'echasnovski/mini.indentscope'
 
   -- Navigation
   use 'kyazdani42/nvim-tree.lua'
@@ -62,7 +66,6 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Languages
-  --use 'sheerun/vim-polyglot'
   use {'snakemake/snakemake', rtp = 'misc/vim/'}
 
   if packer_bootstrap then
@@ -70,20 +73,32 @@ require('packer').startup(function(use)
   end
 end)
 
+-- Initialize
+require('nvim-lastplace').setup()
+require('mini.ai').setup()
+require('mini.bufremove').setup()
+require('mini.comment').setup()
+require('mini.splitjoin').setup()
+require('mini.surround').setup()
+require('tmux').setup()
+require('trouble').setup()
 
--- Plugins with configurations
+require('mini.indentscope').setup({
+    symbol = "│",
+    options = { try_as_border = true }
+  }
+)
+
+-- Plugins with additional configurations
 require("plugins.config.coq")
-require("plugins.config.lsp")
-require("plugins.config.telescope")
 require("plugins.config.gitsigns")
-require("plugins.config.nvim-tree")
+require("plugins.config.lsp")
 require("plugins.config.lualine")
-require("plugins.config.which-key")
+require("plugins.config.nvim-tree")
+require("plugins.config.telescope")
 require("plugins.config.themer")
 require("plugins.config.treesitter")
-require("plugins.config.trouble")
-require("plugins.config.lastplace")
---require("plugins.config.autopairs")
+require("plugins.config.which-key")
 
 
 -- Workaround for 'rtp' issue
