@@ -1,5 +1,12 @@
 # Load more completions
 fpath+=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+autoload -Uz compinit zcompile
+
+zcompare() {
+  if [[ -s $1 && ( ! -s $1.zwc || $1 -nt $1.zwc) ]]; then
+    zcompile "$1"
+  fi
+}
 
 # Should be called before compinit
 zmodload zsh/complist
@@ -17,9 +24,14 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
-autoload -U compinit -Cd /hpc/home/jp102/.zsh/.zcompdump; compinit
-_comp_options+=(globdots) # With hidden files
 
+# Only run compinit if stale
+zcompdump="$ZDOTDIR/.zcompdump"
+if [ "$(find $zcompdump -mtime -1 2>/dev/null -quit)" ]; then
+  compinit -d $zcompdump
+else
+  compinit -C -d $zcompdump
+fi
 
 # setopt GLOB_COMPLETE      # Show autocompletion menu with globs
 setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
