@@ -29,7 +29,6 @@ require('packer').startup(function(use)
   use 'ethanholz/nvim-lastplace'
   use 'folke/which-key.nvim'
   use 'kylechui/nvim-surround'
-  use 'lewis6991/impatient.nvim'
 
   -- LSP Installer and Config (using mason)
   use 'neovim/nvim-lspconfig'
@@ -39,9 +38,15 @@ require('packer').startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim'
 
   -- Treesitter
-  use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdateSync'}
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,
+  }
 
   -- Telescope
   use 'nvim-lua/plenary.nvim'

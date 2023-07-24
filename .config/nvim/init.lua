@@ -1,8 +1,4 @@
--- Start impatient if available
-local have_impatient, impatient = pcall(require, "impatient")
-if have_impatient then
-  impatient.enable_profile()
-end
+vim.loader.enable()
 
 -- Define paths
 local g = vim.g
