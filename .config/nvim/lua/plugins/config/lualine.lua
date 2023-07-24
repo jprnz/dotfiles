@@ -1,18 +1,3 @@
-local signs = {
-  Branch = "",
-  Config = "",
-  Error = "",
-  GitAdded = "",
-  GitModified = "",
-  GitRemoved = "",
-  GitRenamed = "",
-  Hint = "",
-  Info = "",
-  Warn = "",
-}
-
-local navic = require("nvim-navic")
-
 local conditions = {
   buffer_not_empty = function()
     return vim.fn.empty(vim.fn.expand "%:t") ~= 1
@@ -73,9 +58,7 @@ local opts = {
         }
       },
     },
-    lualine_c = {
-      "navic",
-    },
+    lualine_c = {},
     lualine_x = {
       "diagnostics",
     },
