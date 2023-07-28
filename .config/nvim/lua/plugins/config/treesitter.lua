@@ -3,14 +3,12 @@ local opts = {
   ensure_installed = {
     "lua",
     "vim",
-    "markdown",
-    "markdown_inline",
     "python",
   },
 
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true,
+    additional_vim_regex_highlighting = false,
   },
 
   indent = {
@@ -40,6 +38,7 @@ local opts = {
         ['iC'] = '@conditional.inner',
       },
     },
+
     swap = {
       enable = true,
       swap_next = {
@@ -49,6 +48,7 @@ local opts = {
         [']w'] = '@parameter.inner',
       },
     },
+
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
@@ -61,6 +61,7 @@ local opts = {
         ['[['] = '@class.outer',
       },
     },
+
     lsp_interop = {
       enable = true,
       border = 'rounded',
@@ -70,6 +71,6 @@ local opts = {
       },
     },
   },
-},
+}
 
 require('nvim-treesitter.configs').setup(opts)

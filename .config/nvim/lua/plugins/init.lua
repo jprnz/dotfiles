@@ -105,7 +105,6 @@ require("plugins.config.themer")
 require("plugins.config.treesitter")
 require("plugins.config.which-key")
 
-
 -- Workaround for 'rtp' issue
 -- https://github.com/wbthomason/packer.nvim/issues/274
 if not vim.g.packer_compiled_loaded and vim.loop.fs_stat(packer_compile_path) then
