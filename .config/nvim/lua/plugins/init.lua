@@ -85,7 +85,7 @@ require('mini.bufremove').setup()
 require('mini.comment').setup()
 require('mini.splitjoin').setup()
 require('mini.surround').setup()
-require('tmux').setup()
+require('tmux').setup({copy_sync = {enable = false}})
 require('trouble').setup()
 
 require('mini.indentscope').setup({

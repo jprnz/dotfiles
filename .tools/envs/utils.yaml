@@ -23,5 +23,4 @@ dependencies:
   - git
   - unzip
   - gxx_linux-64
-  - fish
-
+  - bash-completion

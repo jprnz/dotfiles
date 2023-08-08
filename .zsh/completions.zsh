@@ -1,5 +1,5 @@
 # Load more completions
-fpath+=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+fpath=($ZDOTDIR/completions $fpath)
 autoload -Uz compinit zcompile
 
 zcompare() {
@@ -47,10 +47,10 @@ zstyle ':completion:*' completer _extensions _complete _approximate
 
 # Use cache for commands using cache
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZDOTDIR/zsh/.zcompcache"
+zstyle ':completion:*' cache-path $zcompdump
+
 # Complete the alias when _expand_alias is used as a function
 zstyle ':completion:*' complete true
-
 zle -C alias-expension complete-word _generic
 bindkey '^A' alias-expension
 zstyle ':completion:alias-expension:*' completer _expand_alias
@@ -83,4 +83,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 zstyle ':completion:*' keep-prefix true
 
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+# Faster git
+git_comp="$CONDA_PREFIX/share/bash-completion/completions/git"
+if [[ ! -z "$CONDA_PREFIX" && -e "$git_comp" ]]; then
+  zstyle ':completion:*:*:git:*' script "$git_comp"
+fi
 
