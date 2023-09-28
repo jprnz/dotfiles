@@ -3,13 +3,17 @@ local opts = {
   ensure_installed = {
     "lua",
     "vim",
-    "python",
+  },
+
+  ignore_install = {
+    "markdown",
+    "python"
   },
 
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-    disable = { "python" },
+    --disable = { "python" },
   },
 
   indent = {

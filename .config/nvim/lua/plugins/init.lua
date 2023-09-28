@@ -71,6 +71,7 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Languages
+  use 'alaviss/nim.nvim'
   use {'snakemake/snakemake', rtp = 'misc/vim/'}
 
   if packer_bootstrap then

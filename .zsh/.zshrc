@@ -1,3 +1,5 @@
+zmodload zsh/zprof
+
 # Source zsh files, order matters
 configs=(
   "completions.zsh"

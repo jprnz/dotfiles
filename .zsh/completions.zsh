@@ -24,14 +24,14 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
-
 # Only run compinit if stale
-zcompdump="$ZDOTDIR/.zcompdump"
-if [ "$(find $zcompdump -mtime -1 2>/dev/null -quit)" ]; then
-  compinit -d $zcompdump
+_comp_files=(${ZDOTDIR}/.zcompdump(Nm-20))
+if (( $#_comp_files )); then
+  compinit -i -C
 else
-  compinit -C -d $zcompdump
+  compinit -i
 fi
+unset _comp_files
 
 # setopt GLOB_COMPLETE      # Show autocompletion menu with globs
 setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
@@ -47,7 +47,7 @@ zstyle ':completion:*' completer _extensions _complete _approximate
 
 # Use cache for commands using cache
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $zcompdump
+zstyle ':completion:*' cache-path $ZDOTDIR/.zcompcache
 
 # Complete the alias when _expand_alias is used as a function
 zstyle ':completion:*' complete true

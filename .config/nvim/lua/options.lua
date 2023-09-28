@@ -47,6 +47,7 @@ opt.ruler = true
 opt.wildmenu = true
 opt.wildmode = "longest,full,full"
 opt.wildoptions =  "pum"
+opt.signcolumn = "yes:1"
 opt.fillchars = {
   diff = '─', -- alternatives = ⣿ ░ ─
   foldopen = '▾',
