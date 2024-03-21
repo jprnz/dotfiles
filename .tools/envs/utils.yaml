@@ -23,4 +23,4 @@ dependencies:
   - git
   - unzip
   - gxx_linux-64
-  - bash-completion
+  - pigz

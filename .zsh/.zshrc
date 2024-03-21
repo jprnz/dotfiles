@@ -46,6 +46,7 @@ zvm_after_init_commands+=(
 
 # Config for autosuggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 

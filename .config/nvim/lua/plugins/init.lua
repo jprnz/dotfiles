@@ -34,8 +34,9 @@ require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
+  use 'jay-babu/mason-null-ls.nvim'
+  use 'nvimtools/none-ls.nvim'
   use 'folke/trouble.nvim'
-  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- Treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'

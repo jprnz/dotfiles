@@ -9,7 +9,6 @@ end
 
 local utils = require("plugins.config.lsp.utils")
 
-
 mason_lsp.setup({
   automatic_installation = true,
   ensure_installed = {
@@ -19,7 +18,6 @@ mason_lsp.setup({
   },
 })
 
-
 mason_lsp.setup_handlers({
   function(server_name)
     lsp[server_name].setup {
@@ -28,6 +26,17 @@ mason_lsp.setup_handlers({
       handlers = utils.handlers,
     }
   end,
+})
+
+require ('mason-null-ls').setup({
+    ensure_installed = {'black'},
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.black
+  }
 })
 
 
