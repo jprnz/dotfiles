@@ -29,6 +29,7 @@ require('packer').startup(function(use)
   use 'ethanholz/nvim-lastplace'
   use 'folke/which-key.nvim'
   use 'kylechui/nvim-surround'
+  use 'norcalli/nvim-colorizer.lua'
 
   -- LSP Installer and Config (using mason)
   use 'neovim/nvim-lspconfig'
@@ -89,6 +90,7 @@ require('mini.splitjoin').setup()
 require('mini.surround').setup()
 require('tmux').setup({copy_sync = {enable = false}})
 require('trouble').setup()
+require('colorizer').setup()
 
 require('mini.indentscope').setup({
     symbol = "│",

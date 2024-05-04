@@ -39,9 +39,9 @@ source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin
 
 # because vi-mode plugin clobbers binding
 zvm_after_init_commands+=(
-  "source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
   "source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh"
   "source $ZDOTDIR/plugins/zsh-fzf/completion.zsh"
+  "source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
 )
 
 # Config for autosuggestions
