@@ -2,7 +2,7 @@
 set -eo pipefail
 
 EXPORTS=(
-  "rg" "htop" "zsh"
+  "rg" "htop" "zsh" "git" "tmux"
 )
 
 env="dots"
@@ -15,11 +15,11 @@ function write_script() {
     cat <<-EOF
 			#!/bin/bash
 			env_prefix="$conda_path/envs/$env"
-      this_prefix="\$(readlink -f "\$CONDA_PREFIX")"
-      if [[ "\$this_prefix" == "\$env_prefix" ]]; then
-        source "$conda_path/bin/activate" $env
-      fi
-      exec "\$CONDA_PREFIX/bin/$1" "\$@"
+			this_prefix="\$(readlink -f "\$CONDA_PREFIX")"
+			if [[ "\$this_prefix" != "\$env_prefix" ]]; then
+			  source "$conda_path/bin/activate" $env
+			fi
+			exec "\$CONDA_PREFIX/bin/$1" "\$@"
 		EOF
   )
 
@@ -28,9 +28,7 @@ function write_script() {
 }
 
 
-set -x
 for exp in ${EXPORTS[@]}; do
-  # Write script if found
   if [ -e $conda_path/envs/$env/bin/$exp ]; then
     echo "---Exporting $exp"
     write_script "$exp"
