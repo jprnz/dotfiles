@@ -1,3 +1,6 @@
+vim.o.completeopt = 'menuone,noselect,noinsert'
+vim.o.showmode = false
+
 vim.g.coq_settings = {
   auto_start = 'shut-up',
   completion = {
@@ -16,16 +19,16 @@ vim.g.coq_settings = {
       enabled = false,
     },
     ghost_text = {
-      context = {"", ""},
+      enabled = false
     },
     pum = {
-      kind_context = {" | ", ""},
-      source_context = {" ", ""}
+      kind_context = {" ", ""},
+      source_context = {"│", ""},
     },
     icons = {
       mode = 'short',
+      spacing = 0,
     },
   }
 }
-
 

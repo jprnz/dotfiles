@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+-- Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- General
 opt.autowrite = true
 opt.autochdir = true
@@ -71,7 +75,7 @@ opt.smarttab = true
 opt.shiftround = true
 
 -- Backups
-local cache_dir = os.getenv("HOME") .. "/.config/nvim"
+local cache_dir = vim.g.cache_dir
 opt.backupdir = cache_dir .. "/backup//"
 opt.directory = cache_dir .. "/swap//"
 opt.undodir = cache_dir .. "/undo//"
@@ -91,15 +95,15 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 -- Status line
 opt.laststatus = 2                    -- Global status
-opt.statusline = "" ..
+opt.statusline = "" ..                --
   '[b%n] ' ..                         -- buffer number
-  '%F ' ..                             -- file name
-  '%h%m%r%w' ..                        -- flags
-  '%=' ..                              -- right align
-  '[%{strlen(&ft)?&ft:\'none\'}|' ..    -- filetype
+  '%F ' ..                            -- file name
+  '%h%m%r%w' ..                       -- flags
+  '%=' ..                             -- right align
+  '[%{strlen(&ft)?&ft:\'none\'}|' ..  -- filetype
   '%{strlen(&fenc)?&fenc:&enc}|' ..   -- encoding
   '%{&fileformat}]' ..                -- file format
-  '[%l|%c%V|%P]'                    -- offset
+  '[%l|%c%V|%P]'                      -- offset
 
 -- Grepprg
 if vim.fn.executable('rg') > 0 then

@@ -7,7 +7,7 @@ if not mason_lsp then
   return
 end
 
-local utils = require("plugins.config.lsp.utils")
+local utils = require("config.lsp.utils")
 
 mason_lsp.setup({
   automatic_installation = true,
@@ -36,7 +36,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.black
-  }
+  },
 })
 
 
@@ -51,15 +51,14 @@ vim.diagnostic.config({
 
 
 -- Set completion icons
-local icons = {
-  error = ">",
-  warn = ">",
-  info = ">",
-  hint = ">"
+local signs = {
+  Error = ">",
+  Warn = ">",
+  Info = ">",
+  Hint = ">"
 }
 
-vim.fn.sign_define("DiagnosticsSignError", { text = icons.error })
-vim.fn.sign_define("DiagnosticsSignWarning", { text = icons.warn })
-vim.fn.sign_define("DiagnosticsSignInformation", { text = icons.info })
-vim.fn.sign_define("DiagnosticsSignHint", { text = icons.hint })
-
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

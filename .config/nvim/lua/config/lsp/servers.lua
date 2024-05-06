@@ -6,8 +6,8 @@ local M = {
     "diagnosticls",
     "lua_ls",
     "pyright",
+    "perlnavigator",
     -- "nimls",
-    -- "perlnavigator",
     -- "sqlls"
     --
   },
