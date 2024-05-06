@@ -18,6 +18,7 @@ hist() {
 }
 
 rc() {
-  rev <(echo "$1") | tr ATCGatcg TAGCtacg
+  for i in $@; do
+    rev <(echo "$i") | tr ATCGatcg TAGCtacg
+  done
 }
-
