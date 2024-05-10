@@ -14,18 +14,18 @@ require('packer').startup(function(use)
   -- Utils
   use ({
     {'wbthomason/packer.nvim'},
-    {'lewis6991/gitsigns.nvim', config = [[require('config.gitsigns')]]},
     {'nvim-lua/plenary.nvim'},
     {'nvim-lua/popup.nvim'},
     {'kyazdani42/nvim-tree.lua'},
     {'folke/which-key.nvim'},
     --{'aserowy/tmux.nvim', config = [[require('tmux.nvim').setup()]]},
+    {'stevearc/aerial.nvim', config = [[require('config.aerial')]]},
+    {'lewis6991/gitsigns.nvim', config = [[require('config.gitsigns')]]},
+    {'ethanholz/nvim-lastplace', config = [[require('nvim-lastplace').setup()]]},
     {'echasnovski/mini.ai', config = [[require('mini.ai').setup()]]},
     {'echasnovski/mini.bufremove', config = [[require('mini.bufremove').setup()]]},
     {'echasnovski/mini.comment', config = [[require('mini.comment').setup()]]},
-    {'echasnovski/mini.surround', config = [[require('mini.surround').setup()]]},
-    {'ethanholz/nvim-lastplace', config = [[require('nvim-lastplace').setup()]]},
-    ---{'stevearc/aerial.nvim', config = [[require('aerial').setup()]]},
+    {'echasnovski/mini.surround',config = [[require('mini.surround').setup()]]}, 
 
     -- UI 
     {'kyazdani42/nvim-web-devicons'},
@@ -55,8 +55,10 @@ require('packer').startup(function(use)
      config = [[require('config.treesitter')]],
      requires = {
        'nvim-treesitter/nvim-treesitter-textobjects',
-       'JoosepAlviste/nvim-ts-context-commentstring'}},
-
+       'JoosepAlviste/nvim-ts-context-commentstring',
+       'gbrlsnchs/telescope-lsp-handlers.nvim'
+     },
+   },
 
    -- Telescope
    {'nvim-telescope/telescope.nvim',

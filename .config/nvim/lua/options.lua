@@ -29,9 +29,9 @@ opt.number = true
 opt.numberwidth = 3
 opt.ttyfast = true
 opt.virtualedit = 'block'
+opt.filetype = 'txt'
 
--- Format
-opt.wrap = false
+-- Format opt.wrap = false
 opt.preserveindent = true
 opt.scrolloff = 5
 opt.showcmd = true
@@ -110,3 +110,4 @@ if vim.fn.executable('rg') > 0 then
   opt.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
   opt.grepformat = vim.opt.grepformat ^ { '%f:%l:%c:%m' }
 end
+
