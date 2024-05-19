@@ -31,12 +31,13 @@ opt.ttyfast = true
 opt.virtualedit = 'block'
 opt.filetype = 'txt'
 
--- Format opt.wrap = false
+-- Format
+opt.wrap = false
 opt.preserveindent = true
-opt.scrolloff = 5
+opt.scrolloff = 10
 opt.showcmd = true
 opt.showmatch = true
-opt.sidescrolloff = 2
+opt.sidescrolloff = 10
 opt.smartcase = true
 
 -- Windows
