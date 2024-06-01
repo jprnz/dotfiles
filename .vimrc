@@ -2,6 +2,9 @@
 filetype plugin indent on
 syntax on
 
+set t_Co=256
+colorscheme ayu
+
 " Loading and viewing
 set autochdir
 set autoindent
@@ -71,7 +74,6 @@ endif
 
 " Correctly highlight $() and other modern affordances in filetype=sh.
 let g:is_posix = 1
-runtime ftplugin/man.vim
 
 " Make grep commands open a quickfix window
 autocmd QuickFixCmdPost *grep* cwindow
@@ -109,6 +111,6 @@ nnoremap <C-o> <C-o>zz
 nnoremap <C-i> <C-i>zz
 
 " Clear highlight with leader enter
-nnoremap <silent> <leader><cr> :noh<cr>=has('diff')?'<bar>diffupdate':''<cr><cr><leader><cr>
+nnoremap <silent> <leader><cr> :noh<cr>
 
 

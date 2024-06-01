@@ -1,8 +1,8 @@
 .tools/conda/
 .tools/bin/
-.vim/plugged/
-.vim/backup/
-.vim/swap/
-.vim/undo/
+.config/nvim/plugged/
+.config/nvim/backup/
+.config/nvim/swap/
+.config/nvim/undo/
 .zsh/.history
 .zsh/.zcompdump

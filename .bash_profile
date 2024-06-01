@@ -34,7 +34,6 @@ export LC_MEASUREMENT="en_US.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-eval $(dircolors $HOME/.dircolors)
-
-export PATH="$PATH:$HOME/.nimble/bin:$PATH"
+# Cobble any attempt to change TMOUT
+export TMOUT=""
 
