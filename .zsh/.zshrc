@@ -34,7 +34,7 @@ umask 007
 
 # These need to be sourced last
 eval "$(zoxide init zsh --cmd "cd")"
-source $ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+#source $ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # because vi-mode plugin clobbers binding

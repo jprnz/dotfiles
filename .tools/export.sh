@@ -5,31 +5,28 @@ EXPORTS=(
   "rg" "htop" "zsh" "git" "tmux"
 )
 
-env="dots"
-conda_path="$(readlink -f "$HOME")/.tools/conda"
+env_path="$(readlink -f "$HOME")/.tools/conda/envs/dots"
 output_path="$(readlink -f "$HOME")/bin"
 
 function write_script() {
-  [ -d $output_path ] || mkdir -p $output_path
   ret=$(
-    cat <<-EOF
+		cat <<-EOF
 			#!/bin/bash
-			env_prefix="$conda_path/envs/$env"
-			this_prefix="\$(readlink -f "\$CONDA_PREFIX")"
-			if [[ "\$this_prefix" != "\$env_prefix" ]]; then
-			  source "$conda_path/bin/activate" $env
+			if [[ "\$CONDA_PREFIX" != "$env_path" ]]; then
+			  micromamba -p $env_path run $1 "\$@"
+			else
+			  \$CONDA_PREFIX/bin/$1 "\$@"
 			fi
-			exec "\$CONDA_PREFIX/bin/$1" "\$@"
 		EOF
   )
 
-  echo "$ret" > $output_path/$1
+  echo -e "$ret" > $output_path/$1
   chmod +x $output_path/$1
 }
 
 
 for exp in ${EXPORTS[@]}; do
-  if [ -e $conda_path/envs/$env/bin/$exp ]; then
+  if [ -e $env_path/bin/$exp ]; then
     echo "---Exporting $exp"
     write_script "$exp"
   fi

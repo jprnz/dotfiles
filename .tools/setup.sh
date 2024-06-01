@@ -1,45 +1,44 @@
 #!/bin/env bash
 set -eo pipefail
 
-path="$PWD"
-conda_url="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
-conda_file=$(basename $conda_url)
-
 error() {
   echo "Error: $@"
   exit 1
 }
 
-# Existing conda directory
-if [ -e "$path/conda" ]; then
-  error "Conda directory already exists. To reinstall, remove and try again."
+url="https://micro.mamba.pm/api/micromamba/linux-64/latest"
+mamba_path="$HOME/bin/micromamba"
+
+# Create bin if needed
+[[ -e $HOME/bin ]] || mkdir $HOME/bin
+export PATH="$HOME/bin:$PATH"
+export MAMBA_ROOT_PREFIX="$HOME/.tools/conda"
+export MAMBA_ALWAYS_YES=yes
+
+# Download and install
+if [[ ! -e $mamba_path ]]; then
+	echo "---Installing conda..."
+	(
+		curl -L "$url" | tar -xvj "bin/micromamba" \
+			&& mv bin/micromamba $mamba_path \
+			&& rm -r bin
+	) || error "Could not download Miniconda from: $conda_url"
 fi
 
-# Download and install 
-echo "---Installing conda..."
-(
-  [ -e $conda_file ] && rm $conda_file
-  wget $conda_url
-) || error "Could not download Miniconda from: $conda_url"
 
+# Install env.yaml
+echo "---Installing environment..."
 (
-  bash $conda_file -b -p "$path/conda"
-  mv $conda_file "$path/conda" 
-) || error "Could not install conda"
-
-
-# Install mamba and update conda
-source conda/bin/activate base
-echo "---Installing mamba..."
-(
-  conda install mamba conda -y
-) || error "Could not install mamba"
-
-# Install snakemake
-echo "---Installing analysis environment..."
-(
-  mamba env create -f env.yaml 
+	micromamba create -f env.yaml \
+		&& micromamba clean -af
+	[[ -e $HOME/.mamba ]] && rm -r $HOME/.mamba
 ) || error "Could not create analysis environment"
+
+# Add exports
+echo "---Exporting tools..."
+(
+	bash export.sh
+) || error "Exporting tools..."
 
 echo "All done, setup sucessful!"
 

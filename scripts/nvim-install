@@ -1,0 +1,39 @@
+#!/bin/bash
+set -eo pipefail
+
+url="https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
+outpath=$HOME/bin/nvim-app
+outlink=$HOME/bin/nvim
+
+echo "Installing nvim..."
+(
+  ## Check for previous install
+  #if [[ -e $outpath ]]; then 
+  #  ver="$($outpath/AppRun --version | head -n1 | cut -d' ' -f2)" 
+	#	echo "  Moving previous install to: $outpath-$ver"
+  #  mv "$outpath" "$outpath-$ver"
+  #fi
+
+  ## Download
+	#echo "  Downloading..."
+  #cd $(dirname $outpath)
+  #curl -LO "$url"
+  #chmod u+x nvim.appimage
+
+	## Extract
+	#echo "  Extracting..."
+  #./nvim.appimage --appimage-extract
+	#mv squashfs-root $(basename $outpath)
+
+	# Make link if needed 
+	if [[ ! -L "$outlink" ]]; then
+		echo "  Creating link..."
+		ln -sr $outpath/AppRun $outlink 
+	fi
+
+	# Clean
+	echo "  Cleanup..."
+  rm nvim.appimage
+) || echo "Error: Could not install nvim..."
+echo "All Done!"
+
