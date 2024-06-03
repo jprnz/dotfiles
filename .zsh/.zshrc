@@ -32,17 +32,14 @@ eval $(dircolors -b $HOME/.dircolors)
 # Ensure umask is set
 umask 007
 
-# These need to be sourced last
+# Zoxide
 eval "$(zoxide init zsh --cmd "cd")"
-#source $ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# because vi-mode plugin clobbers binding
-zvm_after_init_commands+=(
-  "source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh"
-  "source $ZDOTDIR/plugins/zsh-fzf/completion.zsh"
-  "source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-)
+# Plugins
+source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
+source $ZDOTDIR/plugins/zsh-fzf/completion.zsh
+source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # Config for autosuggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
