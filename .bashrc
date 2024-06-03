@@ -18,11 +18,9 @@ eval "$(dircolors $HOME/.dircolors)"
 
 # History
 PROMPT_COMMAND='history -a'
+HISTCONTROL="erasedups:ignoreboth"
 HISTSIZE=5000
 HISTFILESIZE=10000
-HISTCONTROL="erasedups:ignoreboth"
-HISTTIMEFORMAT='%F %T '
-HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
 # Completion
 bind "set completion-ignore-case on"

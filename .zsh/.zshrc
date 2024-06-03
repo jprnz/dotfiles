@@ -1,5 +1,3 @@
-zmodload zsh/zprof
-
 # Source zsh files, order matters
 configs=(
   "completions.zsh"
@@ -19,8 +17,8 @@ export HISTFILE=$ZDOTDIR/.history
 
 # Export statements
 export SHELL="$(readlink -f $(which zsh))"
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="vim"
+export VISUAL="vim"
 export MANPAGER='less'
 export DIRSTACKSIZE=6
 export LESSCHARSET='utf-8'
