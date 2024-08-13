@@ -1,0 +1,6 @@
+auto_stack: 1
+channel_priority: strict
+default_threads: 6
+fetch_threads: 6
+verify_threads: 6
+execute_threads: 6

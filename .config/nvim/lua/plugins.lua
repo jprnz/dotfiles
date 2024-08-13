@@ -65,7 +65,6 @@ require('packer').startup(function(use)
      config = [[require('config.telescope')]],
      requires = {
      'nvim-telescope/telescope-file-browser.nvim',
-     'nvim-telescope/telescope-frecency.nvim',
      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}}},
 
    -- Autocomplete

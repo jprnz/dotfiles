@@ -1,0 +1,21 @@
+#!/usr/bin/awk -f
+
+{
+  if (NR == 1) {
+    for (i = 1; i <= NF; i += 1) {
+      ids[i] = $i 
+    }
+  } else {
+    for (i in ids) {
+      cnt[i] += $i
+    }
+  }
+} 
+
+END {
+  for (i in ids) {
+    printf("%s%s%s\n", ids[i], OFS, cnt[i])
+  }
+}
+    
+

@@ -1,0 +1,81 @@
+#!/bin/env bash
+
+FORMAT=(
+  JobID
+  JobName
+  Account
+  Partition
+  ReqMEM
+  ReqCPUS
+  Elapsed
+  DerivedExitCode
+  State
+  Reason
+  Comment)
+
+STATUS_SORT=(
+  PENDING
+  REQUEUED
+  RUNNING
+  SUSPENDED
+  COMPLETED
+  PREEMPTED
+  TIMEOUT
+  DEADLINE
+  CANCELLED
+  OUT_OF_MEMORY
+  FAILED
+  NODE_FAIL
+  RESIZING
+  REVOKED
+  BOOT_FAIL)
+
+
+
+format=$(printf "%s," ${FORMAT[@]})
+sacct -X --parsable2 --format="$format" "$@" \
+  | awk -F '|' -v sort_str="$(printf "%s," ${STATUS_SORT[@]})" '
+    BEGIN {
+      OFS = "|"
+      split(sort_str, sort, ",")
+      for (i in sort) {
+        sort_order[sort[i]] = i
+      }
+      sort_max = length(sort_order) + 999
+    }; {
+      # Get header mapping
+      if (NR == 1) {
+        for (i = 1; i <= NF; i++) {
+          fields[$i] = i
+        }
+        print -999, $0
+        next
+      }
+
+      state = $fields["State"]
+      if (state in sort_order) {
+        order = sort_order[state]
+      } else {
+        order = sort_max
+      }
+
+      if (length($fields["JobName"]) > 15) {
+        jobname = substr($fields["JobName"], 1, 15) ".."
+        $fields["JobName"] = jobname
+      }
+
+      if ($fields["Reason"] == "None") {
+        $fields["Reason"] = ""
+      }
+
+      if ($fields["Comment"] ~ /^rule_.*_wildcards/) {
+        sub(/rule_/, "", $fields["Comment"])
+        sub(/_wildcards.*/, "", $fields["Comment"])
+      }
+
+      print order, $0
+    }' \
+  | sort -t "|" -k1,1h \
+  | cut -d "|" -f 2- \
+  | column -s "|" -t 
+  

@@ -1,7 +1,11 @@
-# Set prompt
-# vim:ft=sh
-#
-# Prompt
+function _set_block_cursor() {
+  _set_cursor '\e[2 q'
+}
+
+function _set_beam_cursor() {
+  _set_cursor '\e[0 q'
+}
+
 setprompt () {
     # Need this so the prompt will work.
     setopt prompt_subst

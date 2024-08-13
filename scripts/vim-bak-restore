@@ -1,0 +1,34 @@
+#!/bin/bash
+
+prefix_path=$1
+output_path=$(readlink -f $2)
+backup_path=${3:-"$HOME/.vim/backup"}
+
+[ -z $prefix_path ] && (echo "Please enter pattern to search..."; exit 1)
+[ -z $output_path ] && (echo "Please enter output path..."; exit 1)
+
+echo "Seaching for $1..."
+eval unique_files=($(
+  find "$backup_path" -type f -name "*${prefix_path}*" -printf "%f\n" \
+  | sed -r 's/^(.*)-[0-9]+-[0-9]+.vim.bak$/\1/' \
+  | sed -r 's/^(.*)$/"\1"/g' \
+  | sort -V \
+  | uniq))
+
+if [ "${#unique_files[@]}" -eq "0" ]; then
+  echo "Nothing found..."
+  exit 1
+fi
+
+echo "Restoring ${#unique_files[@]} files..."
+for file in "${unique_files[@]}"; do
+  path=$(basename "$file" | tr '%' '/')
+  pick=$(find "${backup_path}" -maxdepth 1 -type f -name "${file}*" -printf "%T@\t%p\n" \
+    | sort -k1,1Vr \
+    | cut -f2 \
+    | head -n1)
+  path="${output_path}${path}"
+  [ -d "$path" ] || mkdir -p $"$(dirname "$path")"
+  cp "$pick" "$path"
+done
+

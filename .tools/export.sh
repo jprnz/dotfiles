@@ -3,6 +3,8 @@ set -eo pipefail
 
 EXPORTS=(
   "rg" "htop" "zsh" "git" "tmux"
+  "fzf" "pigz" "lftp" "yarn" 
+  "awscli" "unzip" "zoxide"
 )
 
 env_path="$(readlink -f "$HOME")/.tools/conda/envs/dots"

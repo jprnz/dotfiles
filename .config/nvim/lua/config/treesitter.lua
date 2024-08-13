@@ -1,8 +1,10 @@
 local opts = {
   auto_install = true,
   ensure_installed = {
+    "c",
     "lua",
     "vim",
+    "vimdoc",
   },
 
   ignore_install = {

@@ -70,13 +70,6 @@ local opts = {
       case_mode = "smart_case",
     },
 
-    frecency = {
-      ignore_patterns = ignore_files,
-      show_scores = false,
-      show_unindexed = true,
-      disable_devicons = false,
-    },
-
 		lsp_handlers = {
       disable = {},
 			location = {
@@ -109,7 +102,6 @@ local opts = {
 
 require('telescope').setup(opts)
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('frecency')
 require('telescope').load_extension('aerial')
 require('telescope').load_extension('lsp_handlers')
 
@@ -136,5 +128,4 @@ map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(theme)<
 map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep(theme)<cr>", mopts)
 map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers(theme)<cr>", mopts)
 map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags(theme)<cr>", mopts)
-map('n', '<leader>fm', "<cmd>lua require('telescope').extensions.frecency.frecency(theme, {workspace='CWD'})<cr>", mopts)
 

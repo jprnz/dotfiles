@@ -1,0 +1,27 @@
+#!/bin/awk -f
+
+BEGIN {
+  binstr = "1,200,500,1000,2000,5000,10000"
+  split(binstr, bins, ",")
+  nbins = length(bins)
+}
+
+{
+  TOT += $3
+  for(i = 1; i < nbins; i++) {
+    if ($2 >= bins[i] && $2 <= bins[i+1]) {
+      SUMS[i] += $3
+    }
+  }
+  if ($2 > bins[nbins]) {
+    SUMS[nbins] += $3
+  }
+}
+
+END {
+  printf("%s,", TOT)
+  for (i = 1; i < nbins; i++) {
+    printf("%s,", 100 * SUMS[i]/TOT)
+  }
+  printf("%s\n", 100 * SUMS[nbins]/TOT)
+}
