@@ -55,10 +55,16 @@ require('packer').startup(function(use)
      config = [[require('config.treesitter')]],
      requires = {
        'nvim-treesitter/nvim-treesitter-textobjects',
+<<<<<<< HEAD
        'JoosepAlviste/nvim-ts-context-commentstring',
        'gbrlsnchs/telescope-lsp-handlers.nvim'
      },
    },
+=======
+       'JoosepAlviste/nvim-ts-context-commentstring'}},
+       'nvim-treesitter/nvim-treesitter-textobjects',
+
+>>>>>>> b9b0512 (ssh config update)
 
    -- Telescope
    {'nvim-telescope/telescope.nvim',
