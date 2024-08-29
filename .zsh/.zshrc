@@ -1,3 +1,6 @@
+# Needs to be sourced before compdef
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
 # Source zsh files, order matters
 configs=(
   "completions.zsh"
@@ -37,7 +40,6 @@ eval "$(zoxide init zsh --cmd "cd")"
 source $ZDOTDIR/plugins/zsh-fzf/bindings.zsh
 source $ZDOTDIR/plugins/zsh-fzf/completion.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # Config for autosuggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"

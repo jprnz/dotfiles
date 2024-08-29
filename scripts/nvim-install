@@ -7,23 +7,23 @@ outlink=$HOME/bin/nvim
 
 echo "Installing nvim..."
 (
-  ## Check for previous install
-  #if [[ -e $outpath ]]; then 
-  #  ver="$($outpath/AppRun --version | head -n1 | cut -d' ' -f2)" 
-	#	echo "  Moving previous install to: $outpath-$ver"
-  #  mv "$outpath" "$outpath-$ver"
-  #fi
+  # Check for previous install
+  if [[ -e $outpath ]]; then 
+    ver="$($outpath/AppRun --version | head -n1 | cut -d' ' -f2)" 
+		echo "  Moving previous install to: $outpath-$ver"
+    mv "$outpath" "$outpath-$ver"
+  fi
 
-  ## Download
-	#echo "  Downloading..."
-  #cd $(dirname $outpath)
-  #curl -LO "$url"
-  #chmod u+x nvim.appimage
+  # Download
+	echo "  Downloading..."
+  cd $(dirname $outpath)
+  curl -LO "$url"
+  chmod u+x nvim.appimage
 
-	## Extract
-	#echo "  Extracting..."
-  #./nvim.appimage --appimage-extract
-	#mv squashfs-root $(basename $outpath)
+	# Extract
+	echo "  Extracting..."
+  ./nvim.appimage --appimage-extract
+	mv squashfs-root $(basename $outpath)
 
 	# Make link if needed 
 	if [[ ! -L "$outlink" ]]; then
