@@ -17,7 +17,7 @@ export MAMBA_ALWAYS_YES=yes
 
 # Download and install
 if [[ ! -e $mamba_path ]]; then
-	echo "---Installing conda..."
+	echo "--- Installing conda..."
 	(
 		curl -L "$url" | tar -xvj "bin/micromamba" \
 			&& mv bin/micromamba $mamba_path \
@@ -27,7 +27,7 @@ fi
 
 
 # Install env.yaml
-echo "---Installing environment..."
+echo "--- Installing environment..."
 (
 	micromamba create -f env.yaml \
 		&& micromamba clean -af
@@ -35,7 +35,7 @@ echo "---Installing environment..."
 ) || error "Could not create analysis environment"
 
 # Add exports
-echo "---Exporting tools..."
+echo "--- Exporting tools..."
 (
 	bash export.sh
 ) || error "Exporting tools..."

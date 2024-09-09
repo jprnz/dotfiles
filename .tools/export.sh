@@ -29,7 +29,7 @@ function write_script() {
 
 for exp in ${EXPORTS[@]}; do
   if [ -e $env_path/bin/$exp ]; then
-    echo "---Exporting $exp"
+    echo "--- Exporting $exp"
     write_script "$exp"
   fi
 done

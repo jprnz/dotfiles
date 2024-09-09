@@ -1,10 +1,10 @@
 #!/bin/bash
 
-prefix_path=$1
+pattern=$1
 output_path=$(readlink -f $2)
-backup_path=${3:-"$HOME/.vim/backup"}
+backup_path=${3:-"$HOME/.nvim/backup"}
 
-[ -z $prefix_path ] && (echo "Please enter pattern to search..."; exit 1)
+[ -z $pattern ] && (echo "Please enter pattern to search..."; exit 1)
 [ -z $output_path ] && (echo "Please enter output path..."; exit 1)
 
 echo "Seaching for $1..."
