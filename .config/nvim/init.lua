@@ -1,23 +1,45 @@
-vim.loader.enable()
+-- load settings
+require("settings")
+require("mappings")
+require("leader")
+require("autocmd")
 
--- Define paths
-local g = vim.g
-g.cache_dir = os.getenv("HOME") .. "/.nvim"
+-- bootstrap plugins & lazy.nvim
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  }
+end
 
--- Disable some default plugins
-vim.g.loaded_getscript = 0
-vim.g.loaded_getscriptPlugin = 0
-vim.g.loaded_vimball = 0
-vim.g.loaded_vimballPlugin = 0
-vim.g.loaded_2html_plugin = 0
-vim.g.loaded_logiPat = 0
-vim.g.loaded_rrhelper = 0
-vim.g.loaded_netrw = 0
-vim.g.loaded_netrwPlugin = 0
-vim.g.loaded_netrwSettings = 0
-vim.g.loaded_netrwFileHandlers = 0
+vim.opt.rtp:prepend(lazypath)
 
-require("bootstrap")
-require("options")
-require('plugins')
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    -- import everything elese
+    import = "plugins"
+  },
 
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "ayu" } },
+
+  -- automatically check for plugin updates every week
+  checker = {
+    enabled = false,
+    notify = true,
+    frequency = 3600 * 24 * 7,
+    check_pinned = false,
+  },
+
+  -- automatically check for config file changes and reload the ui
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
+})
