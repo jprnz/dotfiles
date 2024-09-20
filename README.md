@@ -1,5 +1,5 @@
 # 🐿️ Dot files 
-hurray
+ ~ hazzah ~
 
 ## 🚀 Install
 ```sh
@@ -16,4 +16,4 @@ cd ~/.tools
 
 <div align="center">
 🐙
-<\div>
+</div>
