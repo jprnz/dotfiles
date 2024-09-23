@@ -1,0 +1,55 @@
+#!/bin/perl
+use 5.26.3;
+use strict;
+use warnings;
+use Data::Dumper;
+use Getopt::Long;
+Getopt::Long::Configure qw(gnu_getopt);
+
+$| = 1;
+
+sub usage {
+	say "Usage: ./$0 [OPTIONS] [FILE]";
+	say "Reverse complement file or piped input";
+	say "Options:";
+	say "  --column    | -c   Column to reverse-complement (default: not used)";
+	say "  --delimiter | -d   Pattern used to delimit columns (default: ',')";
+	say "  --help      | -h   Help";
+	say "Example:";
+	say "echo 'ATCG' | revcomp";
+	exit 0;
+}
+
+sub revcomp {
+	my $str = shift;
+	$str =~ tr/ATGCNatgcn/TACGNtacgn/;
+	return reverse($str);
+}
+
+
+my $column = 0;
+my $delim = ",";
+my $help;
+
+GetOptions(
+	"column|c=i" => \$column,
+	"delim|d=s"   => \$delim,
+	"help|h"  => \$help) or usage();
+
+# Print usage and exit 
+usage() if $help;
+
+# Loop
+foreach my $line (<>) {
+	chomp $line;
+	my $ret;
+	if ($column > 0) {
+		my @dat = split(/$delim/, $line);
+		$dat[$column] = revcomp($dat[$column]);
+		$ret = join($delim, @dat);
+	} else {
+		$ret = revcomp($line);
+	}
+	say $ret;
+}
+

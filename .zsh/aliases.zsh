@@ -13,13 +13,13 @@ alias sz="srun -A sgt -p scavenger --mem 8G --pty zsh"
 alias dus='du -k * | sort -nr | cut -f2 | xargs -d "\n" du -sh'
 
 # Programs etc
-alias view="nvim -R"
 alias vimdiff="vim -d"
 alias tmux="tmux -2u"
 alias dots="dotfiles"
 alias vim="nvim"
 alias view="nvim -R"
 alias vimdiff="vim -d"
+alias view="nvim -R"
 
 # SLURM Aliases that provide information in a useful manner for our clusters
 alias si="sinfo -o \"%20P %5D %14F %8z %10m %10d %11l %16f %N %C\""
