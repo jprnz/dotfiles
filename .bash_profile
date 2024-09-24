@@ -37,3 +37,6 @@ export LC_ALL="en_US.UTF-8"
 # Cobble any attempt to change TMOUT
 export TMOUT=""
 
+# Source local .profile
+[ -e "$HOME/.profile" ] && source $HOME/.profile
+
