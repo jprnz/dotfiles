@@ -29,13 +29,6 @@ keymap({ 'n', 'x' }, '[p', '<Cmd>exe "put! " . v:register<CR>', { desc = 'Paste 
 keymap({ 'n', 'x' }, ']p', '<Cmd>exe "put "  . v:register<CR>', { desc = 'Paste Below' })
 
 
--- better up/down
-keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
--- window - navigation
 keymap("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
@@ -52,7 +45,6 @@ keymap("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
 keymap("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 keymap("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 keymap("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-
 
 -- Move Lines
 keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
@@ -73,12 +65,6 @@ keymap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 -- Clear search with <esc>
 keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
--- Clear search, diff update and redraw
-keymap(
-  "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 keymap("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
 keymap("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
@@ -91,9 +77,6 @@ keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Res
 keymap("i", ",", ",<c-g>u")
 keymap("i", ".", ".<c-g>u")
 keymap("i", ";", ";<c-g>u")
-
--- save file
-keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 --keywordprg
 keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
@@ -108,7 +91,6 @@ keymap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Com
 
 -- new file
 keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
 keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 

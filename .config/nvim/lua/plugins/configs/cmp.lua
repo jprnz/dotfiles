@@ -1,4 +1,6 @@
-cmp = require("cmp")
+local cmp = require("cmp")
+local cmp_buffer = require("cmp_buffer")
+
 
 return {
   -- snippet
@@ -68,5 +70,11 @@ return {
     { name = "path" },
     { name = "tmux" },
     { name = "treesitter" }
+  },
+
+  sorting = {
+    comparators = {
+      function(...) return cmp_buffer:compare_locality(...) end,
+    },
   },
 }

@@ -1,7 +1,6 @@
 return {
   {
     "echasnovski/mini.pick",
-    cmd = "Pick",
     opts = require("plugins.configs.pick"),
     dependencies = "echasnovski/mini.extra",
   },
@@ -63,5 +62,7 @@ return {
   { "echasnovski/mini.basics", opts = {} },
   { "echasnovski/mini.bracketed", opts = {} },
   { "echasnovski/mini.move", opts = {} },
-  { "echasnovski/mini.splitjoin", opts = {} }
+  { "echasnovski/mini.splitjoin", opts = {} },
+  { "echasnovski/mini.visits", opts = {} },
+  { "echasnovski/mini.surround", opts = {} },
 }
