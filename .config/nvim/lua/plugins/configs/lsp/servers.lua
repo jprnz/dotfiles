@@ -28,6 +28,7 @@ local servers = {
       },
     },
   },
+  perlnavigator = { },
 }
 
 return servers

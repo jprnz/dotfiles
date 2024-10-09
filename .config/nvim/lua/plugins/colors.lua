@@ -10,10 +10,10 @@ return {
     opts = {
       overrides = {
         Normal = { bg = '#000000' },
-        SignColumn = { bg = '#000000' },
-        WinSeparator = { bg = '#000000', fg = '#1b1b1b' },
-        NonText = { fg = '#1b1b1b' },
-        LineNr = { fg = '#1b1b1b' },
+        SignColumn = { bg = '#000000', fg = '#565b66' },
+        WinSeparator = { bg = '#000000', fg = '#565b66' },
+        NonText = { fg = '#565b66' },
+        LineNr = { fg = '#565b66' },
         MiniPickBorder = { },
         MiniPickBorderBusy = { },
         MiniPickBorderText = { },
